@@ -1,1 +1,4 @@
-{}
+{
+  "themeName" : "starter-kit-wordpress",
+  "host" : "localhost"
+}
