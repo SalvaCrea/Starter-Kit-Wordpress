@@ -1,0 +1,11 @@
+{
+    "name": "salvacrea/starter-kit-wordpress",
+    "description": "Starter Kit For Wordpress",
+    "authors": [
+        {
+            "name": "Salvador Cardona",
+            "email": "contact@salva-crea.fr"
+        }
+    ],
+    "require": {}
+}
