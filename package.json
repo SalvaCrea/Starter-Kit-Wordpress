@@ -35,9 +35,9 @@
     "gulp-postcss": "^7.0.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-stylelint": "^4.0.0",
-    "gulp-uglify": "^3.0.0"
-  },
-  "dependencies": {
-    "gulp-git": "^2.4.2"
+    "gulp-uglify": "^3.0.0",
+    "tool-files": "1.0.0",
+    "gulp-git": "^2.4.2",
+    "gulp-exec": "^2.1.3"
   }
 }
