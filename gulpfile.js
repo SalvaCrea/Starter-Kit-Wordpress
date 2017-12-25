@@ -18,8 +18,12 @@ gulp.task('install', ['cloneWordpress']);
 // Get Wordpress by repositorie Git
 gulp.task('cloneWordpress', function() {
   git.clone('https://github.com/WordPress/WordPress', {args: './wordpress'}, function(err) {
-    console.log('Clone Error');
-    console.log(err);
+    gulp.src('./theme/**')
+  		.pipe(gulp.dest(themePath))
+      .on('error', function(){})
+      .pipe(console.log('iuiuuiou'))
+      .on('error', function(){})
+
   });
 });
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
