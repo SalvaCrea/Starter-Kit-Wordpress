@@ -4,30 +4,47 @@
 var gulp = require('gulp');
 var git = require('gulp-git');
 var connect = require('gulp-connect-php');
-var startKit = require('starter-kit-nodejs');
+var starterKit = require('starter-kit-nodejs');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
 var less = require('gulp-less');
 var postcss = require('gulp-postcss');
 var clean = require('gulp-clean');
+var autoprefixer = require('autoprefixer');
+var cleanCSS = require('gulp-clean-css');
+var composer = require("gulp-composer");
 
-var configuration = startKit.getConfiguration();
+var configuration = starterKit.getConfiguration();
+
+gulp.task("composer", function () {
+    composer({
+        "working-dir": starterKit.getPathTheme,
+        "bin": "composer"
+    });
+});
 
 // Get Wordpress by repositorie Git
-gulp.task('cloneWordpress', function() {
-    git.clone('https://github.com/WordPress/WordPress', {args: './wordpress'}, function(err) {
+gulp.task('get-wordpress', function() {
+    return git.clone('https://github.com/WordPress/WordPress', {args: './wordpress'}, function(err) {
       // handle err
     });
 });
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
-gulp.task('cloneTheme', function(){
-  	gulp.src('./theme/')
-  	.pipe(gulp.dest('./public/'));
+gulp.task('clone-theme', function(){
+  	return gulp.src('./theme/**')
+  	.pipe(gulp.dest( starterKit.getPathTheme ));
+});
+
+// Clone Folder theme in the directiry ./wordpress/wp-content/themes
+gulp.task('watch', function(){
+    gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'update-theme']);
+    gulp.watch('./src/AppBundle/Resources/public/style/**/*.*', ['styles', 'update-theme']);
+    gulp.watch('./theme/templates/**/*.*', ['update-theme']);
 });
 
 // Create Php Server for dev server.
-gulp.task('server', function(){
+gulp.task('server-http', function(){
     connect.server({
         root: './wordpress',
         base: './wordpress',
@@ -59,7 +76,20 @@ gulp.task('scripts', function() {
 
 // Compile files less
 gulp.task('styles', function() {
-
+    return gulp.src('./theme/assets/styles/less/main.less')
+        .pipe(sourcemaps.init())
+        .pipe(less())
+        .pipe(concat('style.css'))
+        .pipe(postcss([ autoprefixer() ]))
+        .pipe(cleanCSS())
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./theme'));
 });
 
-gulp.task('install', ['cloneWordpress', ]);
+// Get Wordpress by repositorie Git
+gulp.task('update-theme', [
+  'clone-theme',
+  'browser-reload'
+]);
+
+gulp.task('install', ['get-wordpress']);
