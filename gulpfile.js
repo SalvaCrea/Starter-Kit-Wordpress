@@ -13,16 +13,8 @@ var postcss = require('gulp-postcss');
 var clean = require('gulp-clean');
 var autoprefixer = require('autoprefixer');
 var cleanCSS = require('gulp-clean-css');
-var composer = require("gulp-composer");
 
 var configuration = starterKit.getConfiguration();
-
-gulp.task("composer", function () {
-    composer({
-        "working-dir": starterKit.getPathTheme,
-        "bin": "composer"
-    });
-});
 
 // Get Wordpress by repositorie Git
 gulp.task('get-wordpress', function() {
