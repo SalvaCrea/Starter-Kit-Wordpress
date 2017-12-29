@@ -31,14 +31,13 @@ gulp.task('clone-theme', function(){
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
 gulp.task('watch', function(){
     gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'update-theme']);
-    gulp.watch('./src/AppBundle/Resources/public/style/**/*.*', ['styles', 'update-theme']);
+    gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'update-theme']);
     gulp.watch('./theme/templates/**/*.*', ['update-theme']);
 });
 
 // Create Php Server for dev server.
 gulp.task('server-http', function(){
     connect.server({
-        root: './wordpress',
         base: './wordpress',
         host: configuration.host,
         port: configuration.port,
