@@ -38,6 +38,7 @@
     "gulp-uglify": "^3.0.0",
     "tool-files": "1.0.0",
     "gulp-git": "^2.4.2",
-    "gulp-exec": "^2.1.3"
+    "gulp-exec": "^2.1.3",
+    "starter-kit-nodejs": "^1.0.0"
   }
 }

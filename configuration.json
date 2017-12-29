@@ -1,4 +1,5 @@
 {
-  "themeName" : "starter-kit-wordpress",
-  "host" : "localhost"
+    "themeName" : "starter-kit-wordpress",
+    "host" : "localhost",
+    "port" : 8000
 }

@@ -2,48 +2,64 @@
 
 // dependencies
 var gulp = require('gulp');
-var request = require('request');
 var git = require('gulp-git');
-var toolFiles = require('tool-files');
-var composer = require('gulp-composer');
-var exec = require('child_process').exec;
+var connect = require('gulp-connect-php');
+var startKit = require('starter-kit-nodejs');
+var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
+var browserSync = require('browser-sync').create();
+var less = require('gulp-less');
+var postcss = require('gulp-postcss');
+var clean = require('gulp-clean');
 
-var configuration = toolFiles.getFileJson('./configuration.json');
-var folderPath = './wordpress/wp-content/themes';
-var themePath = folderPath + '/' +configuration.themeName;
-
-
-gulp.task('install', ['cloneWordpress']);
+var configuration = startKit.getConfiguration();
 
 // Get Wordpress by repositorie Git
 gulp.task('cloneWordpress', function() {
-  git.clone('https://github.com/WordPress/WordPress', {args: './wordpress'}, function(err) {
-    gulp.src('./theme/**')
-  		.pipe(gulp.dest(themePath))
-      .on('error', function(){})
-      .pipe(console.log('iuiuuiou'))
-      .on('error', function(){})
-
-  });
+    git.clone('https://github.com/WordPress/WordPress', {args: './wordpress'}, function(err) {
+      // handle err
+    });
 });
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
 gulp.task('cloneTheme', function(){
-	gulp.src('./theme/**')
-		.pipe(gulp.dest(themePath));
+  	gulp.src('./theme/')
+  	.pipe(gulp.dest('./public/'));
 });
 
-// execute composer and install dependencies in wordpress theme
-gulp.task('composerInstall', function(){
-  var a = exec('composer install -d='+themePath, function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-  });
+// Create Php Server for dev server.
+gulp.task('server', function(){
+    connect.server({
+        root: './wordpress',
+        base: './wordpress',
+        host: configuration.host,
+        port: configuration.port,
+        livereload: true
+    });
 });
 
-// gulp.task('install', ['cloneWordpress', 'cloneTheme', 'composerInstall']);
-
-gulp.task('install', ['cloneWordpress'], function(){
-  gulp.start('cloneTheme', function(){
-    console.log('test');
-  });
+// Refresh the browser.
+gulp.task('browser-reload', function() {
+    browserSync.reload();
 });
+
+// Contain all files Js in one file.
+gulp.task('scripts', function() {
+    return gulp.src([
+        './theme/assets/scripts/lib/jquery-3.2.1.js',
+        /**
+         *  Here, you can add Javascript library
+         */
+        './theme/assets/scripts/src/**/*.*',
+    ])
+        .pipe(sourcemaps.init())
+        .pipe(concat('script.js'))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./theme'));
+});
+
+// Compile files less
+gulp.task('styles', function() {
+
+});
+
+gulp.task('install', ['cloneWordpress', ]);
