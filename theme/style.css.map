@@ -1,0 +1,1 @@
+{"version":3,"sources":["include/page.less"],"names":[],"mappings":"AAAA,gBACI,WAAA","file":"style.css","sourcesContent":[".post-type-page{\r\n    margin-top: 10px;\r\n}\r\n"]}

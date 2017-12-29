@@ -84,4 +84,4 @@ gulp.task('update-theme', [
   'browser-reload'
 ]);
 
-gulp.task('install', ['get-wordpress']);
+gulp.task('server', ['scripts', 'styles', 'clone-theme', 'watch', 'server-http']);
