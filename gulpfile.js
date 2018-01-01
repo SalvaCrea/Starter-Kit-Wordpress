@@ -13,6 +13,7 @@ var postcss = require('gulp-postcss');
 var clean = require('gulp-clean');
 var autoprefixer = require('autoprefixer');
 var cleanCSS = require('gulp-clean-css');
+var exec = require('child_process').exec;
 
 var configuration = starterKit.getConfiguration();
 
@@ -22,10 +23,21 @@ gulp.task('get-wordpress', function() {
       // handle err
     });
 });
+
+// Get Wordpress by repositorie Git
+gulp.task('composer', function() {
+    return exec('composer install -d=' + starterKit.getPathTheme(), function (err, stdout, stderr) {
+      // response Console
+      console.log(stdout);
+      console.log(stderr);
+    });
+});
+
+gulp
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
 gulp.task('clone-theme', function(){
   	return gulp.src('./theme/**')
-  	.pipe(gulp.dest( starterKit.getPathTheme ));
+  	.pipe(gulp.dest( starterKit.getPathTheme() ));
 });
 
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
