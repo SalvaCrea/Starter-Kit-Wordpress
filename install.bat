@@ -1,6 +1,7 @@
 @echo off
 echo The application install compoments.
 call npm install
+call bower install
 call composer install
 call gulp get-wordpress
 call gulp clone-theme

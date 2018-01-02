@@ -1,5 +1,11 @@
 {
     "themeName" : "starter-kit-wordpress",
     "host" : "localhost",
-    "port" : 8000
+    "port" : 8000,
+    "ftp" : {
+        "host" : "",
+        "password" : "",
+        "port" : "",
+        "directory" : ""
+    }
 }

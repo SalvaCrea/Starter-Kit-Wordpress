@@ -24,6 +24,13 @@
   	}
 	},
   "require": {
-	  "wpackagist-plugin/timber-library": "0.22.*"
+	  "wpackagist-plugin/timber-library": "0.22.*",
+    "timber/timber": "^1.5"
+  },
+  "autoload": {
+      "psr-4": {
+          "StarterKitWp\\":"app/"
+      }
   }
+
 }

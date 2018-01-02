@@ -1,3 +1,4 @@
 /vendor/
 node_modules
 /wordpress
+/bower_components

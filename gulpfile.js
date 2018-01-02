@@ -7,7 +7,7 @@ var connect = require('gulp-connect-php');
 var starterKit = require('starter-kit-nodejs');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
-var browserSync = require('browser-sync').create();
+var browserSync = require('browser-sync');
 var less = require('gulp-less');
 var postcss = require('gulp-postcss');
 var clean = require('gulp-clean');
@@ -26,7 +26,12 @@ gulp.task('get-wordpress', function() {
 
 // Get Wordpress by repositorie Git
 gulp.task('composer', function() {
-    return exec('composer install -d=' + starterKit.getPathTheme(), function (err, stdout, stderr) {
+    exec('composer update -d=' + starterKit.getPathTheme(), function (err, stdout, stderr) {
+      // response Console
+      console.log(stdout);
+      console.log(stderr);
+    });
+    exec('composer dumpautoload -o -d=' + starterKit.getPathTheme(), function (err, stdout, stderr) {
       // response Console
       console.log(stdout);
       console.log(stderr);
@@ -45,6 +50,7 @@ gulp.task('watch', function(){
     gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'update-theme']);
     gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'update-theme']);
     gulp.watch('./theme/templates/**/*.*', ['update-theme']);
+    gulp.watch('./theme/*.*', ['update-theme']);
 });
 
 // Create Php Server for dev server.
@@ -54,6 +60,11 @@ gulp.task('server-http', function(){
         host: configuration.host,
         port: configuration.port,
         livereload: true
+    },
+    function(){
+      browserSync({
+          proxy: '127.0.0.1:8000'
+      });
     });
 });
 
@@ -65,7 +76,7 @@ gulp.task('browser-reload', function() {
 // Contain all files Js in one file.
 gulp.task('scripts', function() {
     return gulp.src([
-        './theme/assets/scripts/lib/jquery-3.2.1.js',
+        './bower_components/jquery/dist/jquery.min.js',
         /**
          *  Here, you can add Javascript library
          */
@@ -74,7 +85,7 @@ gulp.task('scripts', function() {
         .pipe(sourcemaps.init())
         .pipe(concat('script.js'))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./theme'));
+        .pipe(gulp.dest( starterKit.getPathTheme() ));
 });
 
 // Compile files less
@@ -86,13 +97,13 @@ gulp.task('styles', function() {
         .pipe(postcss([ autoprefixer() ]))
         .pipe(cleanCSS())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./theme'));
+        .pipe(gulp.dest( starterKit.getPathTheme() ));
 });
 
 // Get Wordpress by repositorie Git
 gulp.task('update-theme', [
-  'clone-theme',
-  'browser-reload'
+    'clone-theme',
+    'browser-reload'
 ]);
 
 gulp.task('server', ['scripts', 'styles', 'clone-theme', 'watch', 'server-http']);
