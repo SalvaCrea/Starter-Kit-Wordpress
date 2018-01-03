@@ -14,6 +14,7 @@ var clean = require('gulp-clean');
 var autoprefixer = require('autoprefixer');
 var cleanCSS = require('gulp-clean-css');
 var exec = require('child_process').exec;
+var wpPot = require('gulp-wp-pot');
 
 var configuration = starterKit.getConfiguration();
 
@@ -22,6 +23,20 @@ gulp.task('get-wordpress', function() {
     return git.clone('https://github.com/WordPress/WordPress', {args: './wordpress'}, function(err) {
       // handle err
     });
+});
+
+// Translate Language in folder theme
+gulp.task('translate', function() {
+
+  let options = {
+    domain: 'domain',
+    package: 'Example project'
+  };
+
+  gulp.src('./theme/languages/**')
+    .pipe(wpPot(options))
+    .pipe(gulp.dest( starterKit.getPathTheme() + '/languages'));
+
 });
 
 // Get Wordpress by repositorie Git
