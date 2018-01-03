@@ -1,6 +1,7 @@
 # starter-kit-wordpress
-Starter Kit Wordpress with Gulp, Babel, Twig, Composer, Bower. This starter kit use Timber a library for integrating Twig in wordpress.
+Starter Kit Wordpress with Gulp, Babel, Twig, Less, Composer, Bower, Browser-Sync, Autload Psr-4. This starter kit use [Timber](https://github.com/timber/timber) a library for integrating Twig in wordpress.
 
+The starter Kit Generate a wordpress theme with a moderne environement.
 
 ## How to install
 
