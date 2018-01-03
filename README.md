@@ -18,7 +18,7 @@ The generator theme use less for compilating in css. The main file less in this 
 
 All files javascript is compilated in a once file javascript. The main file is here but you can create other javascript file.
 
-    starter-kit-wordpress/theme/assets/scripts/src/main.js
+    /theme/assets/scripts/src/main.js
 
 **Babel**  is utilised for compilating files. You can write in ESCMA 7 compatible for all browsers.
 
