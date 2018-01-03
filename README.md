@@ -26,7 +26,7 @@ All files javascript is compilated in a once file javascript. The main file is h
 
 ### How to install and how to run on Windows
 
-Just double click on the file install.bat. After the installation double click on server.bat for run the developement server.
+Just double click on the file **install.bat**. After the installation double click on **server.bat** for run the developement server.
 
 ### How to install and how to run on Linux
 
