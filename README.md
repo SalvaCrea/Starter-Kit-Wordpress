@@ -12,9 +12,9 @@ Just double click on the file install.bat. After the installation double click o
 
 Use the commands
 
-'''
+```
 make install
 make server
-'''
+```
 
 The commands install all library and after run the developement server.
