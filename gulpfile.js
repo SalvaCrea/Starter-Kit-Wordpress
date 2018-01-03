@@ -50,6 +50,7 @@ gulp.task('watch', function(){
     gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'update-theme']);
     gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'update-theme']);
     gulp.watch('./theme/templates/**/*.*', ['update-theme']);
+    gulp.watch('./theme/app/**/*.*', ['update-theme']);
     gulp.watch('./theme/*.*', ['update-theme']);
 });
 

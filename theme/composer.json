@@ -1,12 +1,12 @@
 {
-  "name": "upstatement/timber-starter-theme",
+  "name": "SalvaCrea/timber-starter-theme",
   "description": "Starter theme to build a Timber theme",
   "type":"wordpress-theme",
   "minimum-stability" : "stable",
   "authors": [
       {
-          "name": "jarednova",
-          "email": "jared@upstatement.com"
+          "name": "Cardona Salvador",
+          "email": "contact@salva-crea.fr"
       }
   ],
   "repositories": [
@@ -15,21 +15,12 @@
       "url": "https://wpackagist.org"
     }
   ],
-  "extra": {
-  	"installer-paths": {
-      "../../plugins/{$name}/": [
-        "wpackagist-plugin/*",
-        "type:wordpress-plugin"
-      ]
-  	}
-	},
   "require": {
-	  "wpackagist-plugin/timber-library": "0.22.*",
     "timber/timber": "^1.5"
   },
   "autoload": {
       "psr-4": {
-          "StarterKitWp\\":"app/"
+          "starterkitwp\\":"app/"
       }
   }
 
