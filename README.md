@@ -3,6 +3,17 @@ Starter Kit Wordpress with Gulp, Babel, Twig, Less, Composer, Bower, Browser-Syn
 
 The starter Kit Generate a wordpress theme with a moderne environement.
 
+Deploy a website wordpress with just one command :
+
+``make install``
+
+This command make :
+
+- Dowload the last version of wordpress by Github.
+- Install Twig.
+- Install a dev environement with Gulp and NodeJs.
+- Install the Theme in wordpress.  
+
 ## Auto Refresh
 
 If the developement server is running each file changement refresh the browser by the library NodeJs Gulp Browser-Sync.
@@ -43,3 +54,4 @@ The commands install all library and after run the developement server.
 
 System of controller mvc like Symfony or Laravel is in developing.
 Folder for translate files Po in Mo.
+Deploy on Ftp server.
