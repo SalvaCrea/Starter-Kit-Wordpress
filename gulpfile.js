@@ -47,8 +47,8 @@ gulp.task('clone-theme', function(){
 
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
 gulp.task('watch', function(){
-    gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'update-theme']);
-    gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'update-theme']);
+    gulp.watch('./theme/assets/scripts/**/*.*', ['scripts']);
+    gulp.watch('./theme/assets/styles/**/*.*', ['styles']);
     gulp.watch('./theme/templates/**/*.*', ['update-theme']);
     gulp.watch('./theme/app/**/*.*', ['update-theme']);
     gulp.watch('./theme/*.*', ['update-theme']);
@@ -108,3 +108,5 @@ gulp.task('update-theme', [
 ]);
 
 gulp.task('server', ['scripts', 'styles', 'clone-theme', 'watch', 'server-http']);
+
+gulp.task('assets', ['scripts', 'styles', 'clone-theme']);
