@@ -33,6 +33,30 @@ All files javascript is compilated in a once file javascript. The main file is h
 
 **Babel**  is utilised for compilating files. You can write in ESCMA 7 compatible for all browsers.
 
+## Develop a Wordpress Theme with Twig
+
+The files templating In this folder :
+``/themes/templates/``
+
+The twig templating langage is used.
+
+```
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="content-wrapper">
+		<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
+			<section class="article-content">
+				<h1 class="article-h1">{{post.title}}</h1>
+				<div class="article-body">
+					{{post.content}}
+				</div>
+			</section>
+		</article>
+	</div><!-- /content-wrapper -->
+{% endblock %}
+```
+
 ## How to install
 
 ### Windows : How to install and how to run
