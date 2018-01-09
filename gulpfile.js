@@ -32,9 +32,9 @@ gulp.task('translate', function() {
     domain: 'domain',
     package: 'Example project'
   };
-
-  gulp.src('./theme/languages/**')
-    .pipe(wpPot(options))
+  console.log()
+  gulp.src('./theme/languages/**/*.pot')
+    .pipe(wpPot())
     .pipe(gulp.dest( starterKit.getPathTheme() + '/languages'));
 
 });
@@ -96,6 +96,7 @@ gulp.task('scripts', function() {
         /**
          *  Here, you can add Javascript library
          */
+        // './bower_components/jquery/dist/boostrap.min.js',
         './theme/assets/scripts/src/**/*.*',
     ])
         .pipe(sourcemaps.init())
