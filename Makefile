@@ -1,8 +1,8 @@
 ENV ?= "dev"
 
-all:
+install:
 	 		npm install
-			call bower install
+			bower install
 	 		composer install
 	 		gulp get-wordpress
 	 		gulp clone-theme
@@ -10,3 +10,6 @@ all:
 
 server:
 			gulp server
+
+required:
+			npm install -g bower
