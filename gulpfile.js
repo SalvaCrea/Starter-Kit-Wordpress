@@ -14,7 +14,7 @@ var clean = require('gulp-clean');
 var autoprefixer = require('autoprefixer');
 var cleanCSS = require('gulp-clean-css');
 var exec = require('child_process').exec;
-var wpPot = require('gulp-wp-pot');
+var po2json = require('gulp-po2json');
 
 var configuration = starterKit.getConfiguration();
 
@@ -23,20 +23,6 @@ gulp.task('get-wordpress', function() {
     return git.clone('https://github.com/WordPress/WordPress', {args: './wordpress'}, function(err) {
       // handle err
     });
-});
-
-// Translate Language in folder theme
-gulp.task('translate', function() {
-
-  let options = {
-    domain: 'domain',
-    package: 'Example project'
-  };
-  console.log()
-  gulp.src('./theme/languages/**/*.pot')
-    .pipe(wpPot())
-    .pipe(gulp.dest( starterKit.getPathTheme() + '/languages'));
-
 });
 
 // Get Wordpress by repositorie Git
@@ -56,7 +42,11 @@ gulp.task('composer', function() {
 gulp
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
 gulp.task('clone-theme', function(){
-  	return gulp.src('./theme/**')
+  	return gulp.src([
+        './theme/app',
+        './theme/templates',
+        './theme/midleware/**'
+    ])
   	.pipe(gulp.dest( starterKit.getPathTheme() ));
 });
 
@@ -66,7 +56,8 @@ gulp.task('watch', function(){
     gulp.watch('./theme/assets/styles/**/*.*', ['styles']);
     gulp.watch('./theme/templates/**/*.*', ['update-theme']);
     gulp.watch('./theme/app/**/*.*', ['update-theme']);
-    gulp.watch('./theme/*.*', ['update-theme']);
+    gulp.watch('./theme/midleware/**/*.*', ['update-theme']);
+    gulp.watch('./theme/languages/**/*.*', ['translate']);
 });
 
 // Create Php Server for dev server.

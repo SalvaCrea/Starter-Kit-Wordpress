@@ -79,3 +79,11 @@ The commands install all library and after run the developement server.
 System of controller mvc like Symfony or Laravel is in developing.
 Folder for translate files Po in Mo.
 Deploy on Ftp server.
+
+## Required
+
+- Git.
+- Nodejs.
+- Gulp.
+- Bower.
+- Composer

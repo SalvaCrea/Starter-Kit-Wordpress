@@ -2,3 +2,4 @@
 node_modules
 /wordpress
 /bower_components
+package-lock.json

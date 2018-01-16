@@ -1,5 +1,0 @@
-
-
-#: 404.php:16 loop.php:26
-msgid "Not Found"
-msgstr ""
