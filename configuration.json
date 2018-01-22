@@ -9,9 +9,10 @@
         "directory": ""
     },
     "database": {
-        "host"    : "",
-        "database": "",
-        "username": "",
-        "password": ""
+        "host"    : "localhost",
+        "name": "wordpress",
+        "username": "root",
+        "password": "",
+        "exportPath": "./bdd",
     }
 }
