@@ -20,26 +20,25 @@
     "url": "https://github.com/SalvaCrea/Starter-Kit-Wordpress/issues"
   },
   "homepage": "https://github.com/SalvaCrea/Starter-Kit-Wordpress#readme",
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^7.2.5",
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^7.3.0",
     "browser-sync": "^2.23.5",
-    "browserify": "^13.1.0",
+    "browserify": "^13.3.0",
     "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
     "gulp-clean-css": "^3.9.2",
-    "gulp-composer": "^0.4.4",
     "gulp-concat": "^2.6.1",
     "gulp-connect-php": "^1.0.1",
     "gulp-exec": "^2.1.3",
     "gulp-git": "^2.5.1",
-    "gulp-less": "~3.3.0",
+    "gulp-less": "^3.3.2",
     "gulp-postcss": "^7.0.1",
     "gulp-sourcemaps": "^2.6.3",
     "gulp-stylelint": "^4.0.0",
+    "merge-stream": "^1.0.1",
+    "mysqldump": "^1.4.2",
     "starter-kit-nodejs": "^1.0.0",
-    "tool-files": "1.0.0",
-    "mysqldump": "^1.4.2"
+    "tool-files": "^1.0.0"
   }
 }

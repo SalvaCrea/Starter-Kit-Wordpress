@@ -10,7 +10,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync');
 var less = require('gulp-less');
 var postcss = require('gulp-postcss');
-var clean = require('gulp-clean');
 var autoprefixer = require('autoprefixer');
 var cleanCSS = require('gulp-clean-css');
 var exec = require('child_process').exec;
@@ -27,23 +26,17 @@ gulp.task('get-wordpress', function() {
 
 // Get Install dependencies in theme
 gulp.task('composer', function() {
-
-    // var a = exec('cd '+ starterKit.getPathTheme(),{cwd: starterKit.getPathTheme()}, function (err, stdout, stderr) {
-    //   exec('composer update', function (err, stdout, stderr) {
-    //       console.log(stdout);
-    //       console.log(stderr);
-    //   });
-    //   exec('composer dumpautoload -o', function (err, stdout, stderr) {
-    //     // response Console
-    //     console.log(stdout);
-    //     console.log(stderr);
-    //   });
-    //   console.log(stdout);
-    //   console.log(stderr);
-    // });
+    exec('composer update', {cwd: starterKit.getPathTheme()},function (err, stdout, stderr) {
+      // response Console
+      console.log(stdout);
+      console.log(stderr);
+    });
+    exec('composer dumpautoload -o', {cwd: starterKit.getPathTheme()},function (err, stdout, stderr) {
+      // response Console
+      console.log(stdout);
+      console.log(stderr);
+    });
 });
-
-
 
 
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
@@ -66,7 +59,7 @@ gulp.task('server-http', function(){
     },
     function(){
       browserSync({
-          proxy: '127.0.0.1:8000'
+          proxy: configuration.host + ":" + configuration.port
       });
     });
 });
@@ -94,7 +87,7 @@ gulp.task('scripts', function() {
 
 // Compile files less
 gulp.task('styles', function() {
-    return gulp.src('./theme/assets/styles/less/main.less')
+    var lessStream = gulp.src('./theme/assets/styles/less/main.less')
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('style.css'))
