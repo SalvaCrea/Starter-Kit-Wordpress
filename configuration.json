@@ -13,6 +13,6 @@
         "name": "wordpress",
         "username": "root",
         "password": "",
-        "exportPath": "./bdd",
+        "exportPath": "./export/bdd/bdd.sql"
     }
 }

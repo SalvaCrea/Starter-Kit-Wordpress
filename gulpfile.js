@@ -14,7 +14,6 @@ var clean = require('gulp-clean');
 var autoprefixer = require('autoprefixer');
 var cleanCSS = require('gulp-clean-css');
 var exec = require('child_process').exec;
-var po2json = require('gulp-po2json');
 var mysqlDump = require('mysqldump');
 
 var configuration = starterKit.getConfiguration();
@@ -120,9 +119,9 @@ gulp.task('clone:database', function() {
     mysqlDump({
         host: configuration.database.host,
         user: configuration.database.username,
-        password: configuration.database.host,
-        database: configuration.database.password,
-        dest: configuration.database.exportPath // destination file
+        password: configuration.database.password,
+        database: configuration.database.name,
+        dest: configuration.database.exportPath  // destination file
     },function(err){
         // create data.sql file;
     })
