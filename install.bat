@@ -4,6 +4,6 @@ call npm install
 call bower install
 call composer install
 call gulp get-wordpress
-call gulp clone-theme
+call gulp clone:theme
 call gulp composer
 echo The application is installed. The go to start.

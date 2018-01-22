@@ -5,7 +5,7 @@ install:
 			bower install
 	 		composer install
 	 		gulp get-wordpress
-	 		gulp clone-theme
+	 		gulp clone:theme
 	 		gulp composer
 
 server:

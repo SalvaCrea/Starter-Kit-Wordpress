@@ -25,30 +25,26 @@ gulp.task('get-wordpress', function() {
     });
 });
 
-// Get Wordpress by repositorie Git
+// Get Install dependencies in theme
 gulp.task('composer', function() {
-    exec('composer update -d=' + starterKit.getPathTheme(), function (err, stdout, stderr) {
-      // response Console
-      console.log(stdout);
-      console.log(stderr);
-    });
-    exec('composer dumpautoload -o -d=' + starterKit.getPathTheme(), function (err, stdout, stderr) {
-      // response Console
-      console.log(stdout);
-      console.log(stderr);
-    });
+
+    // var a = exec('cd '+ starterKit.getPathTheme(),{cwd: starterKit.getPathTheme()}, function (err, stdout, stderr) {
+    //   exec('composer update', function (err, stdout, stderr) {
+    //       console.log(stdout);
+    //       console.log(stderr);
+    //   });
+    //   exec('composer dumpautoload -o', function (err, stdout, stderr) {
+    //     // response Console
+    //     console.log(stdout);
+    //     console.log(stderr);
+    //   });
+    //   console.log(stdout);
+    //   console.log(stderr);
+    // });
 });
 
-gulp
-// Clone Folder theme in the directiry ./wordpress/wp-content/themes
-gulp.task('clone-theme', function(){
-  	return gulp.src([
-        './theme/app',
-        './theme/templates',
-        './theme/midleware/**'
-    ])
-  	.pipe(gulp.dest( starterKit.getPathTheme() ));
-});
+
+
 
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
 gulp.task('watch', function(){
@@ -110,7 +106,7 @@ gulp.task('styles', function() {
 
 // Get Wordpress by repositorie Git
 gulp.task('update-theme', [
-    'clone-theme',
+    'clone:theme',
     'browser-reload'
 ]);
 
@@ -127,6 +123,16 @@ gulp.task('clone:database', function() {
     })
 });
 
-gulp.task('server', ['scripts', 'styles', 'clone-theme', 'watch', 'server-http']);
+// Clone Folder theme in the directiry ./wordpress/wp-content/themes
+gulp.task('clone:theme', function(){
+  	return gulp.src([
+        './theme/app',
+        './theme/templates',
+        './theme/midleware/**'
+    ])
+  	.pipe(gulp.dest( starterKit.getPathTheme() ));
+});
 
-gulp.task('assets', ['scripts', 'styles', 'clone-theme']);
+gulp.task('server', ['scripts', 'styles', 'clone:theme', 'watch', 'server-http']);
+
+gulp.task('assets', ['scripts', 'styles', 'clone:theme']);
