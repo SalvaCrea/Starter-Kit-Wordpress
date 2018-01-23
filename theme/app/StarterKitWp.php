@@ -1,6 +1,6 @@
 <?php
 
-namespace starterkitwp;
+namespace StarterKitWp;
 use Timber\Site;
 use Timber\Menu;
 
