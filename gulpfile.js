@@ -118,12 +118,14 @@ gulp.task('clone:database', function() {
 
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
 gulp.task('clone:theme', function(){
-  	return gulp.src([
-        './theme/app',
-        './theme/templates',
-        './theme/midleware/**'
-    ])
+  	gulp.src('./theme/midleware/**')
   	.pipe(gulp.dest( starterKit.getPathTheme() ));
+
+    gulp.src('./theme/templates/**/**')
+    .pipe(gulp.dest( starterKit.getPathTheme() + "/templates" ));
+
+    gulp.src('./theme/app/**/**')
+    .pipe(gulp.dest( starterKit.getPathTheme() + "/app" ));
 });
 
 gulp.task('server', ['scripts', 'styles', 'clone:theme', 'watch', 'server-http']);
