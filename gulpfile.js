@@ -46,6 +46,7 @@ gulp.task('watch', function(){
     gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'browser-reload']);
     gulp.watch('./theme/templates/**/*.*', ['update-theme']);
     gulp.watch('./theme/src/**/*.*', ['update-theme']);
+    gulp.watch('./theme/app/**/*.*', ['update-theme']);
     gulp.watch('./theme/midleware/**/*.*', ['update-theme']);
     gulp.watch('./theme/languages/**/*.*', ['translate']);
 });
@@ -140,6 +141,9 @@ gulp.task('clone:theme', function(){
 
     gulp.src('./theme/src/**/**')
     .pipe(gulp.dest( starterKit.getPathTheme() + "/src" ));
+
+    gulp.src('./theme/app/**/**')
+    .pipe(gulp.dest( starterKit.getPathTheme() + "/app" ));
 });
 
 gulp.task('server', ['scripts', 'styles', 'clone:theme', 'watch', 'server-http']);

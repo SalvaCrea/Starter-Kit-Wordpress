@@ -21,7 +21,8 @@
   },
   "autoload": {
       "psr-4": {
-          "StarterKitWp\\":"src/"
+          "StarterKitWp\\":"src/",
+          "AppWordpress\\":"app/"
       }
   }
 

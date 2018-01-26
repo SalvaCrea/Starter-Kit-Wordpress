@@ -8,8 +8,11 @@
     {% block header %}
 
     <div class="wrapper">
-        <h1 class="hdr-logo" role="banner"><a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
-        </h1>
+
+				<div class="logo-container">
+						<h1 class="hdr-logo" role="banner"><a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
+						</h1>
+				</div>
 
         <nav class="nav-main" id="nav-main" role="navigation">
             {% include "menu.twig" with {'menu': menu.get_items} %}
