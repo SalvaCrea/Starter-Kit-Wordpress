@@ -17,11 +17,11 @@
   ],
   "require": {
     "timber/timber": "^1.5",
-    "salvacrea/wpframework": "^1.0"
+    "salvacrea/wp-framework": "^1.0"
   },
   "autoload": {
       "psr-4": {
-          "StarterKitWp\\":"app/"
+          "StarterKitWp\\":"src/"
       }
   }
 

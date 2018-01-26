@@ -14,6 +14,7 @@ var autoprefixer = require('autoprefixer');
 var cleanCSS = require('gulp-clean-css');
 var exec = require('child_process').exec;
 var mysqlDump = require('mysqldump');
+var merge = require('merge-stream');
 
 var configuration = starterKit.getConfiguration();
 
@@ -44,7 +45,7 @@ gulp.task('watch', function(){
     gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'browser-reload']);
     gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'browser-reload']);
     gulp.watch('./theme/templates/**/*.*', ['update-theme']);
-    gulp.watch('./theme/app/**/*.*', ['update-theme']);
+    gulp.watch('./theme/src/**/*.*', ['update-theme']);
     gulp.watch('./theme/midleware/**/*.*', ['update-theme']);
     gulp.watch('./theme/languages/**/*.*', ['translate']);
 });
@@ -87,14 +88,27 @@ gulp.task('scripts', function() {
 
 // Compile files less
 gulp.task('styles', function() {
+
+    var cssStream = gulp.src([
+      './bower_components/bootstrap/dist/css/bootstrap-grid.min.css',
+      './bower_components/bootstrap/dist/css/bootstrap-reboot.min.css'
+    ])
+        .pipe(sourcemaps.init())
+        .pipe(concat('css-files.css'))
+
     var lessStream = gulp.src('./theme/assets/styles/less/main.less')
         .pipe(sourcemaps.init())
         .pipe(less())
+        .pipe(concat('less-files.less'))
+
+    var mergedStream = merge(lessStream, cssStream)
         .pipe(concat('style.css'))
         .pipe(postcss([ autoprefixer() ]))
         .pipe(cleanCSS())
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest( starterKit.getPathTheme() ));
+
+    return mergedStream;
 });
 
 // Get Wordpress by repositorie Git
@@ -124,8 +138,8 @@ gulp.task('clone:theme', function(){
     gulp.src('./theme/templates/**/**')
     .pipe(gulp.dest( starterKit.getPathTheme() + "/templates" ));
 
-    gulp.src('./theme/app/**/**')
-    .pipe(gulp.dest( starterKit.getPathTheme() + "/app" ));
+    gulp.src('./theme/src/**/**')
+    .pipe(gulp.dest( starterKit.getPathTheme() + "/src" ));
 });
 
 gulp.task('server', ['scripts', 'styles', 'clone:theme', 'watch', 'server-http']);

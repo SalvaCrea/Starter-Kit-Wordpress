@@ -4,7 +4,7 @@
 		{% endblock %}
 {% endblock %}
 
-<header class="header">
+<header id="header" class="container-fluid">
     {% block header %}
 
     <div class="wrapper">
@@ -19,7 +19,7 @@
     {% endblock %}
 </header>
 
-<section class="content-wrapper" id="content" role="main">
+<section id="content" class="content-wrapper container-fluid"  role="main">
     {% if title %}
 
     <h1>{{title}}</h1>
@@ -37,7 +37,7 @@
 </section>
 
 {% block footer %}
-	<footer id="footer">
+	<footer id="footer" class="container-fluid">
 	    {% include 'footer.twig' %}
 	</footer>
 	{{ function('wp_footer') }}
