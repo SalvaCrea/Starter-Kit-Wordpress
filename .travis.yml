@@ -3,3 +3,6 @@ php:
     - 7.1.0
     - 7.1.0
     - 7.1.0
+
+install:
+  - sudo make install
