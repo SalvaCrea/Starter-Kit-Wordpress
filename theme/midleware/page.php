@@ -23,5 +23,11 @@
 
 $context = Timber::get_context();
 $post = new TimberPost();
+
 $context['post'] = $post;
-Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
+if ($post->object_type == 'page') {
+    Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
+}
+elseif ($post->object_type == 'post') {
+    Timber::render( array( 'single-' . $post->ID . '.twig', 'single-' . $post->post_type . '.twig', 'single.twig' ), $context );
+}

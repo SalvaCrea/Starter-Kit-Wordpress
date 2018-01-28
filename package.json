@@ -37,7 +37,8 @@
     "gulp-stylelint": "^4.0.0",
     "merge-stream": "^1.0.1",
     "mysqldump": "^1.4.2",
-    "starter-kit-nodejs": "^1.0.0",
-    "tool-files": "^1.0.0"
+    "starter-kit-nodejs": "^1.0.1",
+    "tool-files": "^1.0.1",
+    "yargs": "^11.0.0"
   }
 }

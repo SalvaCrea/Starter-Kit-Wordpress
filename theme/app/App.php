@@ -24,6 +24,8 @@ class App extends Site
     public function add_to_context( $context ) {
         $context['menu'] = new Menu();
         $context['site'] = $this;
+        $context['themeUrl'] = get_template_directory_uri();
+        $context['urlFolderImg'] = $context['themeUrl'] . "/" . "images";
         return $context;
     }
 

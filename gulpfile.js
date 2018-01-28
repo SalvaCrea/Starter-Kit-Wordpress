@@ -15,6 +15,7 @@ var exec         = require('child_process').exec;
 var mysqlDump    = require('mysqldump');
 var merge        = require('merge-stream');
 var toolFiles    = require('tool-files');
+var argv         = require('yargs').argv
 
 var configuration = starterKit.getConfiguration();
 
@@ -41,16 +42,19 @@ gulp.task('theme:composer', function() {
 // Create Php Server for dev server.
 gulp.task('server:create', function(){
     connect.server({
-        base: './wordpress',
-        host: configuration.host,
-        port: configuration.port,
-        livereload: true
+        // hostname: configuration.host,
+        // port: configuration.port,
+        base: './wordpress'
     },
     function(){
       browserSync({
-          proxy: configuration.host + ":" + configuration.port
+          proxy: configuration.host + ':' + configuration.port
       });
     });
+});
+
+gulp.task('server:stop', function() {
+    server.closeServer();
 });
 
 // Refresh the browser.
@@ -74,6 +78,9 @@ gulp.task('theme:clone', function(){
 
     gulp.src('./theme/src/**/**')
     .pipe(gulp.dest( starterKit.getPathTheme() + "/src" ));
+
+    gulp.src('./theme/assets/images/**/**')
+    .pipe(gulp.dest( starterKit.getPathTheme() + "/images" ));
 
     gulp.src('./theme/app/**/**')
     .pipe(gulp.dest( starterKit.getPathTheme() + "/app" ));
@@ -120,7 +127,7 @@ gulp.task('styles', function() {
     return mergedStream;
 });
 
-// Refresh the browser.
+// Refresh the browser.op
 gulp.task('clone:database', function() {
     mysqlDump({
         host: configuration.database.host,
@@ -137,6 +144,7 @@ gulp.task('clone:database', function() {
 gulp.task('watch', function(){
     gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'browser:reload']);
     gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'browser:reload']);
+    gulp.watch('./theme/assets/images/**/*.*', ['theme:update']);
     gulp.watch('./theme/templates/**/*.*', ['theme:update']);
     gulp.watch('./theme/src/**/*.*', ['theme:update']);
     gulp.watch('./theme/app/**/*.*', ['theme:update']);
@@ -146,7 +154,13 @@ gulp.task('watch', function(){
 
 // Get Wordpress by repositorie Git
 gulp.task('wp', function() {
-    console.log(options);
+    console.log(argv);
+    // argv.cmd;
+    exec('php wp-cli.phar ' + argv.cmd, {cwd: "./wordpress"},function (err, stdout, stderr) {
+      // response Console
+      console.log(stdout);
+      console.log(stderr);
+    });
 });
 
 gulp.task('server:start', ['scripts', 'styles', 'theme:clone', 'watch', 'server:create']);

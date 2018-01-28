@@ -1,20 +1,25 @@
+
+
 {% block html_head_container %}
 		{% include 'html-header.twig' %}
 		{% block head %}
 		{% endblock %}
 {% endblock %}
 
+<body class="{{body_class}}">
+
 <header id="header" class="container-fluid">
     {% block header %}
 
-    <div class="wrapper">
+    <div class="wrapper row">
 
-				<div class="logo-container">
+				<div class="logo-container col-md-3">
+						<img src="{{urlFolderImg}}/default-logo.svg" alt="">
 						<h1 class="hdr-logo" role="banner"><a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
 						</h1>
 				</div>
 
-        <nav class="nav-main" id="nav-main" role="navigation">
+        <nav class="nav-main col-md-9" id="nav-main" role="navigation">
             {% include "menu.twig" with {'menu': menu.get_items} %}
         </nav>
         <!-- #nav -->
@@ -22,7 +27,7 @@
     {% endblock %}
 </header>
 
-<section id="content" class="content-wrapper container-fluid"  role="main">
+<section id="content" class="content-wrapper container"  role="main">
     {% if title %}
 
     <h1>{{title}}</h1>
@@ -45,3 +50,5 @@
 	</footer>
 	{{ function('wp_footer') }}
 {% endblock %}
+
+</body>

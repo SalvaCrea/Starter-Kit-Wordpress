@@ -1,15 +1,55 @@
 #header{
     background: white;
     padding: 15px;
+    a{
+        color: black;
+    }
     .logo-container{
         display: inline-block;
+        height: 100%;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: center;
+        img{
+            height: 30px;
+        }
     }
     #nav-main{
         display: inline-block;
-        ul{
-            li{
-                display: inline-block;
-                list-style: none;
+        li{
+            list-style: none;
+            a{
+                font-weight: @bold;
+            }
+        }
+        >ul{
+            height: 100%;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            align-content: flex-start;
+            align-items: center;
+            >li{
+                margin: 0 15px;
+                position: relative;
+                >ul{
+                    position: absolute;
+                    left: 0;
+                    display: none;
+                }
+                &:hover{
+                    >ul{
+                        display: block;
+                    }
+                }
             }
         }
     }
