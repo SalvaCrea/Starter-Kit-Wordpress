@@ -38,8 +38,6 @@ gulp.task('theme:composer', function() {
     });
 });
 
-
-
 // Create Php Server for dev server.
 gulp.task('server:create', function(){
     connect.server({
@@ -59,7 +57,6 @@ gulp.task('server:create', function(){
 gulp.task('browser:reload', function() {
     browserSync.reload();
 });
-
 
 // Get Wordpress by repositorie Git
 gulp.task('theme:update', [
@@ -147,6 +144,10 @@ gulp.task('watch', function(){
     gulp.watch('./theme/languages/**/*.*', ['translate']);
 });
 
+// Get Wordpress by repositorie Git
+gulp.task('wp', function() {
+    console.log(options);
+});
 
 gulp.task('server:start', ['scripts', 'styles', 'theme:clone', 'watch', 'server:create']);
 

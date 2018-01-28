@@ -4,10 +4,9 @@ install:
 	 		npm install
 			bower install
 	 		composer install
-	 		gulp get-wordpress
-	 		gulp clone:theme
-	 		gulp composer
 			gulp theme:install
+			gulp clone:theme
+			gulp theme:composer
 
 server:
 			gulp server
