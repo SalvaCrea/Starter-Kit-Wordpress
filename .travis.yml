@@ -1,5 +1,5 @@
-language: ruby
-rvm:
- - 2.2
- - jruby
- - rbx-3
+language: php
+php:
+    - 7.1.0
+    - 7.1.0
+    - 7.1.0
