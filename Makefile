@@ -7,6 +7,7 @@ install:
 	 		gulp get-wordpress
 	 		gulp clone:theme
 	 		gulp composer
+			gulp theme:install
 
 server:
 			gulp server

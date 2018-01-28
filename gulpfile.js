@@ -1,32 +1,31 @@
 'use strict';
 
 // dependencies
-var gulp = require('gulp');
-var git = require('gulp-git');
-var connect = require('gulp-connect-php');
-var starterKit = require('starter-kit-nodejs');
-var concat = require('gulp-concat');
-var sourcemaps = require('gulp-sourcemaps');
-var browserSync = require('browser-sync');
-var less = require('gulp-less');
-var postcss = require('gulp-postcss');
+var gulp         = require('gulp');
+var connect      = require('gulp-connect-php');
+var starterKit   = require('starter-kit-nodejs');
+var concat       = require('gulp-concat');
+var sourcemaps   = require('gulp-sourcemaps');
+var browserSync  = require('browser-sync');
+var less         = require('gulp-less');
+var postcss      = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
-var cleanCSS = require('gulp-clean-css');
-var exec = require('child_process').exec;
-var mysqlDump = require('mysqldump');
-var merge = require('merge-stream');
+var cleanCSS     = require('gulp-clean-css');
+var exec         = require('child_process').exec;
+var mysqlDump    = require('mysqldump');
+var merge        = require('merge-stream');
+var toolFiles    = require('tool-files');
 
 var configuration = starterKit.getConfiguration();
 
 // Get Wordpress by repositorie Git
-gulp.task('get-wordpress', function() {
-    return git.clone('https://github.com/WordPress/WordPress', {args: './wordpress'}, function(err) {
-      // handle err
-    });
+gulp.task('theme:install', function() {
+    starterKit.dowloadWordpress();
+    starterKit.dowloadWpCli();
 });
 
 // Get Install dependencies in theme
-gulp.task('composer', function() {
+gulp.task('theme:composer', function() {
     exec('composer update', {cwd: starterKit.getPathTheme()},function (err, stdout, stderr) {
       // response Console
       console.log(stdout);
@@ -40,19 +39,9 @@ gulp.task('composer', function() {
 });
 
 
-// Clone Folder theme in the directiry ./wordpress/wp-content/themes
-gulp.task('watch', function(){
-    gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'browser-reload']);
-    gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'browser-reload']);
-    gulp.watch('./theme/templates/**/*.*', ['update-theme']);
-    gulp.watch('./theme/src/**/*.*', ['update-theme']);
-    gulp.watch('./theme/app/**/*.*', ['update-theme']);
-    gulp.watch('./theme/midleware/**/*.*', ['update-theme']);
-    gulp.watch('./theme/languages/**/*.*', ['translate']);
-});
 
 // Create Php Server for dev server.
-gulp.task('server-http', function(){
+gulp.task('server:create', function(){
     connect.server({
         base: './wordpress',
         host: configuration.host,
@@ -67,8 +56,30 @@ gulp.task('server-http', function(){
 });
 
 // Refresh the browser.
-gulp.task('browser-reload', function() {
+gulp.task('browser:reload', function() {
     browserSync.reload();
+});
+
+
+// Get Wordpress by repositorie Git
+gulp.task('theme:update', [
+    'theme:clone',
+    'browser:reload'
+]);
+
+// Clone Folder theme in the directiry ./wordpress/wp-content/themes
+gulp.task('theme:clone', function(){
+  	gulp.src('./theme/midleware/**')
+  	.pipe(gulp.dest( starterKit.getPathTheme() ));
+
+    gulp.src('./theme/templates/**/**')
+    .pipe(gulp.dest( starterKit.getPathTheme() + "/templates" ));
+
+    gulp.src('./theme/src/**/**')
+    .pipe(gulp.dest( starterKit.getPathTheme() + "/src" ));
+
+    gulp.src('./theme/app/**/**')
+    .pipe(gulp.dest( starterKit.getPathTheme() + "/app" ));
 });
 
 // Contain all files Js in one file.
@@ -79,7 +90,7 @@ gulp.task('scripts', function() {
          *  Here, you can add Javascript library
          */
         // './bower_components/jquery/dist/boostrap.min.js',
-        './theme/assets/scripts/src/**/*.*',
+        './theme/assets/scripts/src/**/*.js',
     ])
         .pipe(sourcemaps.init())
         .pipe(concat('script.js'))
@@ -112,12 +123,6 @@ gulp.task('styles', function() {
     return mergedStream;
 });
 
-// Get Wordpress by repositorie Git
-gulp.task('update-theme', [
-    'clone:theme',
-    'browser-reload'
-]);
-
 // Refresh the browser.
 gulp.task('clone:database', function() {
     mysqlDump({
@@ -132,20 +137,17 @@ gulp.task('clone:database', function() {
 });
 
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
-gulp.task('clone:theme', function(){
-  	gulp.src('./theme/midleware/**')
-  	.pipe(gulp.dest( starterKit.getPathTheme() ));
-
-    gulp.src('./theme/templates/**/**')
-    .pipe(gulp.dest( starterKit.getPathTheme() + "/templates" ));
-
-    gulp.src('./theme/src/**/**')
-    .pipe(gulp.dest( starterKit.getPathTheme() + "/src" ));
-
-    gulp.src('./theme/app/**/**')
-    .pipe(gulp.dest( starterKit.getPathTheme() + "/app" ));
+gulp.task('watch', function(){
+    gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'browser:reload']);
+    gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'browser:reload']);
+    gulp.watch('./theme/templates/**/*.*', ['theme:update']);
+    gulp.watch('./theme/src/**/*.*', ['theme:update']);
+    gulp.watch('./theme/app/**/*.*', ['theme:update']);
+    gulp.watch('./theme/midleware/**/*.*', ['theme:update']);
+    gulp.watch('./theme/languages/**/*.*', ['translate']);
 });
 
-gulp.task('server', ['scripts', 'styles', 'clone:theme', 'watch', 'server-http']);
 
-gulp.task('assets', ['scripts', 'styles', 'clone:theme']);
+gulp.task('server:start', ['scripts', 'styles', 'theme:clone', 'watch', 'server:create']);
+
+gulp.task('assets', ['scripts', 'styles', 'theme:clone']);
