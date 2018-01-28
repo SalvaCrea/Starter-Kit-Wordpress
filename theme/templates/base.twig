@@ -10,20 +10,22 @@
 
 <header id="header" class="container-fluid">
     {% block header %}
+		<div class="container">
+	    <div class="wrapper row">
 
-    <div class="wrapper row">
+					<div class="logo-container col-md-3">
+							<a class="hdr-logo-link" href="{{site.url}}" rel="home">
+									<img src="{{urlFolderImg}}/default-logo-100-100.png" alt="logo">
+									<span>{{site.name}}</span>
+							</a>
+					</div>
 
-				<div class="logo-container col-md-3">
-						<img src="{{urlFolderImg}}/default-logo.svg" alt="">
-						<h1 class="hdr-logo" role="banner"><a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
-						</h1>
-				</div>
-
-        <nav class="nav-main col-md-9" id="nav-main" role="navigation">
-            {% include "menu.twig" with {'menu': menu.get_items} %}
-        </nav>
-        <!-- #nav -->
-    </div>
+	        <nav class="nav-main col-md-9" id="nav-main" role="navigation">
+	            {% include "menu.twig" with {'menu': menu.get_items} %}
+	        </nav>
+	        <!-- #nav -->
+	    </div>
+		</div>
     {% endblock %}
 </header>
 

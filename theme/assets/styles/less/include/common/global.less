@@ -6,12 +6,14 @@ html {
     font-family: @font;
     font-weight: @normal;
     font-size: @font-size-base;
-
+    color: @black;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     background-color: @gray-light;
+}
+p{
+    line-height: @line-height-base;
 }
 
 .container{
@@ -26,4 +28,10 @@ a{
     &:hover{
         text-decoration: none;
     }
+}
+img{
+    max-width: 100%;
+}
+hr{
+    opacity: 0.5;
 }
