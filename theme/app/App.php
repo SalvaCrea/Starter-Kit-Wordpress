@@ -8,6 +8,8 @@ class App extends Site
 {
     public function __construct()
     {
+        $this->registerPostType();
+
         add_theme_support( 'post-formats' );
         add_theme_support( 'post-thumbnails' );
         add_theme_support( 'menus' );
@@ -16,11 +18,19 @@ class App extends Site
         add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
         add_action( 'init', array( $this, 'register_post_types' ) );
         add_action( 'init', array( $this, 'register_taxonomies' ) );
-
-        new \StarterKitWp\Model\PostType\PostTypeExample();
-
         parent::__construct();
     }
+    public function registerPostType(){
+        $test = new \StarterKitWp\Model\PostType\PostTypeExample();
+        $test->init();
+    }
+    public function registerTaxonomies(){
+
+    }
+    /**
+     * Add Variable Globale in Twig
+     * @param array return array
+     */
     public function add_to_context( $context ) {
         $context['menu'] = new Menu();
         $context['site'] = $this;
@@ -28,12 +38,6 @@ class App extends Site
         $context['urlFolderImg'] = $context['themeUrl'] . "/" . "images";
         return $context;
     }
-
-    public function myfoo( $text ) {
-        $text .= ' bar!';
-        return $text;
-    }
-
     public function add_to_twig( $twig ) {
         /* this is where you can add your own functions to twig */
         // $twig->addExtension( new \Twig_Extension_StringLoader() );
