@@ -21,8 +21,8 @@ class App extends Site
         parent::__construct();
     }
     public function registerPostType(){
-        $test = new \StarterKitWp\Model\PostType\PostTypeExample();
-        $test->init();
+        $postTypeExemple = new \StarterKitWp\Model\PostType\PostTypeExample();
+        $postTypeExemple->init();
     }
     public function registerTaxonomies(){
 
