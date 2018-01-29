@@ -1,5 +1,6 @@
-<div class="comment-form">
-    <h3> add comment </h3>
+
+<div class="content-comment">
+    <h3> Add Your Comments </h3>
 
     <form id="form" class="comment-form" method="post" action="{{ site.site_url~'/wp-comments-post.php' }}">
         {% if  user %}
@@ -30,7 +31,7 @@
         <div>
             <button type="submit" name="Submit" class="btn"> send </button>
             <button type="reset"> cancel </button>
-            <p> Your comment will be revised by the site if needed. </p>
+            <p class="info-form"> Your comment will be revised by the site if needed. </p>
         </div>
     </form>
 </div>

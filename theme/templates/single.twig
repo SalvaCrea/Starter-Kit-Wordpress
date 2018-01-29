@@ -33,7 +33,7 @@
 				<!-- comments -->
 				<div class="comments">
 				    {% if post.comments %}
-					<h3> comments </h3>
+
 					{% for cmt in post.comments %}
 					    {% include "comment.twig" with {comment:cmt} %}
 					{% endfor %}
