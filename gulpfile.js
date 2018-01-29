@@ -22,7 +22,7 @@ var configuration = starterKit.getConfiguration();
 // Get Wordpress by repositorie Git
 gulp.task('theme:install', function() {
     starterKit.dowloadWordpress();
-    starterKit.dowloadWpCli();
+    // starterKit.dowloadWpCli();
 });
 
 // Get Install dependencies in theme
@@ -152,16 +152,6 @@ gulp.task('watch', function(){
     gulp.watch('./theme/languages/**/*.*', ['translate']);
 });
 
-// Get Wordpress by repositorie Git
-gulp.task('wp', function() {
-    console.log(argv);
-    // argv.cmd;
-    exec('php wp-cli.phar ' + argv.cmd, {cwd: "./wordpress"},function (err, stdout, stderr) {
-      // response Console
-      console.log(stdout);
-      console.log(stderr);
-    });
-});
 
 gulp.task('server:start', ['scripts', 'styles', 'theme:clone', 'watch', 'server:create']);
 
