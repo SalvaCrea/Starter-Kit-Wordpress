@@ -10,7 +10,8 @@ html {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: @gray-light;
+    // background-color: @gray-light;
+    background-image: url('https://image.freepik.com/free-vector/hexagonal-pattern_1051-833.jpg');
 }
 p{
     line-height: @line-height-base;
@@ -34,4 +35,22 @@ img{
 }
 hr{
     opacity: 0.5;
+}
+
+.container-thumbnail{
+    width: 100%;
+    padding: 150px 0px 200px 0px;
+    text-align: center;
+    background-size: cover;
+    background-position: 50% 50%;
+    margin-bottom: -@margin-content * 2;
+    border-bottom: 1px solid #ddd;
+    h1{
+        color: white;
+        font-size: 50px;
+        text-shadow: @light-box-shadow;
+    }
+}
+.blog-author{
+    font-size: 18px;
 }
