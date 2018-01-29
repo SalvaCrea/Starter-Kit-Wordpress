@@ -10,8 +10,11 @@ html {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+}
+body{
     // background-color: @gray-light;
-    background-image: url('https://image.freepik.com/free-vector/hexagonal-pattern_1051-833.jpg');
+    background: url('https://www.toptal.com/designers/subtlepatterns/patterns/swirl_pattern.png');
 }
 p{
     line-height: @line-height-base;
@@ -39,16 +42,29 @@ hr{
 
 .container-thumbnail{
     width: 100%;
-    padding: 150px 0px 200px 0px;
+    padding: 220px 0 260px 0;
     text-align: center;
     background-size: cover;
     background-position: 50% 50%;
+    position: relative;
     margin-bottom: -@margin-content * 2;
-    border-bottom: 1px solid #ddd;
     h1{
-        color: white;
-        font-size: 50px;
-        text-shadow: @light-box-shadow;
+      color: #fff;
+      font-size: 50px;
+      text-shadow: 1px 1px 7px #6b6b6b;
+      padding: 15px 33px;
+      background: #04040473;
+      font-weight: 400;
+      display: inline;
+    }
+    .try{
+        width: 100%;
+        border-bottom: 1px solid #838383;
+        position: absolute;
+        bottom: -18px;
+        height: 20px;
+        background: url('https://www.toptal.com/designers/subtlepatterns/patterns/zig%20zag%20wool.png');
+        box-shadow: @light-box-shadow;
     }
 }
 .blog-author{
