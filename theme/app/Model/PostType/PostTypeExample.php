@@ -2,7 +2,7 @@
 
 namespace StarterKitWp\Model\PostType;
 
-use WpFramework\Model\PostType;
+use ChocolatineWp\Model\PostType;
 
 class PostTypeExample extends PostType
 {

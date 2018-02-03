@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-    "salvacrea/chocolatinewp": "^1.0"
+    "salvacrea/chocolatinewp": "^1.0.5"
   },
   "autoload": {
       "psr-4": {

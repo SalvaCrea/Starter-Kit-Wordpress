@@ -7,4 +7,4 @@ $timber = new \Timber\Timber();
 
 // new StarterKitWp\StarterKit();
 $AppWordpress = new AppWordpress\App();
-$wpFramework = new WpFramework\App();
+$chocolatineWp = new ChocolatineWp\App();
