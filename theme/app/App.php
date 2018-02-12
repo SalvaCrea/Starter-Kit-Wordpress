@@ -23,6 +23,7 @@ class App extends Site
     public function registerPostType(){
         $postTypeExemple = new \StarterKitWp\Model\PostType\PostTypeExample();
         $postTypeExemple->init();
+        // $footerLeft = new \StarterKitWp\Model\Widget\FooterLeft();
     }
     public function registerTaxonomies(){
 
