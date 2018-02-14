@@ -1,32 +1,16 @@
 <?php
 namespace AppWordpress;
 
-use Timber\Site;
-use Timber\Menu;
-
-class App extends Site
+class App
 {
     public function __construct()
     {
-        $this->registerPostType();
-
-        add_theme_support( 'post-formats' );
-        add_theme_support( 'post-thumbnails' );
-        add_theme_support( 'menus' );
-        add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
-        add_filter( 'timber_context', array( $this, 'add_to_context' ) );
-        add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
-        add_action( 'init', array( $this, 'register_post_types' ) );
-        add_action( 'init', array( $this, 'register_taxonomies' ) );
-        parent::__construct();
-    }
-    public function registerPostType(){
-        $postTypeExemple = new \AppWordpress\Model\PostType\PostTypeExample();
-        $postTypeExemple->init();
-        $footerLeft = new \AppWordpres\Model\Widget\FooterLeft();
-    }
-    public function registerTaxonomies(){
-
+        $postTypeExemple         = new Model\PostType\PostTypeExample();
+        $widgetFooterLeft        = new Model\Widget\WidgetExample();
+        $sidebarFooterLeft       = new Model\Sidebar\SidebarFooterLeft();
+        $sidebarFooterRight      = new Model\Sidebar\SidebarFooterRight();
+        $sidebarFooterMiddleLeft = new Model\Sidebar\SidebarFooterMiddleLeft();
+        $sidebarFooterMiddleLeft = new Model\Sidebar\SidebarFooterMiddleRight();
     }
     /**
      * Add Variable Globale in Twig

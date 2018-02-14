@@ -1,10 +1,6 @@
 <?php
 require "vendor/autoload.php";
 
-
-$timber = new \Timber\Timber();
-\Timber\Timber::$dirname = array('templates', 'views');
-
+$chocolatineWP = new ChocolatineWp\App();
 // new StarterKitWp\StarterKit();
 $AppWordpress = new AppWordpress\App();
-$chocolatineWp = new ChocolatineWp\App();
