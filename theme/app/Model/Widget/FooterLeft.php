@@ -1,10 +1,9 @@
 <?php
+namespace AppWordpress\Model\Widget;
 
-namespace StarterKitWp\Model\Widget;
+use ChocolatineWp\Model\Widget as baseWidget;
 
-use ChocolatineWp\Model\Widget;
-
-class FooterLeft extends Widget
+class FooterLeft extends baseWidget
 {
     /**
      * Class of widget

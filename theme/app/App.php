@@ -21,9 +21,9 @@ class App extends Site
         parent::__construct();
     }
     public function registerPostType(){
-        $postTypeExemple = new \StarterKitWp\Model\PostType\PostTypeExample();
+        $postTypeExemple = new \AppWordpress\Model\PostType\PostTypeExample();
         $postTypeExemple->init();
-        // $footerLeft = new \StarterKitWp\Model\Widget\FooterLeft();
+        $footerLeft = new \AppWordpres\Model\Widget\FooterLeft();
     }
     public function registerTaxonomies(){
 

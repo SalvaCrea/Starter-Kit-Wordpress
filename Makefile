@@ -7,6 +7,7 @@ install:
 			gulp theme:install
 			gulp clone:theme
 			gulp theme:composer
+			gulp create:virtual:folder
 
 server:
 			gulp server

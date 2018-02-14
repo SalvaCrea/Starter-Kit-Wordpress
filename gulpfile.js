@@ -18,21 +18,46 @@ var toolFiles    = require('tool-files');
 var argv         = require('yargs').argv
 
 var configuration = starterKit.getConfiguration();
-
+var currentPath = process.cwd();
+/**
+ * True is system environement is windows
+ * @type {Boolean}
+ */
+var isWin = process.platform === "win32"
+if ( isWin ) {
+    currentPath = currentPath.replace("/", "\\");
+}
 // Get Wordpress by repositorie Git
 gulp.task('theme:install', function() {
     starterKit.dowloadWordpress();
     // starterKit.dowloadWpCli();
 });
 
+/**
+ * Create a virtual folder for Dev Server
+ * @return {[type]} [description]
+ */
+gulp.task('create:virtual:folder', function() {
+      if ( isWin ) {
+          exec('mklink /D ' + currentPath + '\\wordpress\\wp-content\\themes\\' + configuration.themeName + " " + currentPath + '\\theme',function (err, stdout, stderr) {
+              console.log(stdout);
+              console.log(stderr);
+          } )
+      } else {
+          exec('ln -s ' + currentPath + '/wordpress/wp-content/themes/' + configuration.themeName + " " + currentPath + '/theme',function (err, stdout, stderr) {
+              console.log(stdout);
+              console.log(stderr);
+          } )
+      }
+});
 // Get Install dependencies in theme
 gulp.task('theme:composer', function() {
-    exec('composer update', {cwd: starterKit.getPathTheme()},function (err, stdout, stderr) {
+    exec('composer update', { cwd: './theme' },function (err, stdout, stderr) {
       // response Console
       console.log(stdout);
       console.log(stderr);
     });
-    exec('composer dumpautoload -o', {cwd: starterKit.getPathTheme()},function (err, stdout, stderr) {
+    exec('composer dumpautoload -o', { cwd: './theme' },function (err, stdout, stderr) {
       // response Console
       console.log(stdout);
       console.log(stderr);
@@ -70,20 +95,6 @@ gulp.task('theme:update', [
 
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
 gulp.task('theme:clone', function(){
-  	gulp.src('./theme/midleware/**')
-  	.pipe(gulp.dest( starterKit.getPathTheme() ));
-
-    gulp.src('./theme/templates/**/**')
-    .pipe(gulp.dest( starterKit.getPathTheme() + "/templates" ));
-
-    gulp.src('./theme/src/**/**')
-    .pipe(gulp.dest( starterKit.getPathTheme() + "/src" ));
-
-    gulp.src('./theme/assets/images/**/**')
-    .pipe(gulp.dest( starterKit.getPathTheme() + "/images" ));
-
-    gulp.src('./theme/app/**/**')
-    .pipe(gulp.dest( starterKit.getPathTheme() + "/app" ));
 });
 
 // Contain all files Js in one file.
@@ -94,12 +105,12 @@ gulp.task('scripts', function() {
          *  Here, you can add Javascript library
          */
         // './bower_components/jquery/dist/boostrap.min.js',
-        './theme/assets/scripts/src/**/*.js',
+        './theme/Ressources/assets/scripts/src/**/*.js',
     ])
         .pipe(sourcemaps.init())
         .pipe(concat('script.js'))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest( starterKit.getPathTheme() ));
+        .pipe(gulp.dest( './theme' ));
 });
 
 // Compile files less
@@ -112,7 +123,7 @@ gulp.task('styles', function() {
         .pipe(sourcemaps.init())
         .pipe(concat('css-files.css'))
 
-    var lessStream = gulp.src('./theme/assets/styles/less/main.less')
+    var lessStream = gulp.src('./theme/Ressources/assets/styles/less/main.less')
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('less-files.less'))
@@ -122,7 +133,7 @@ gulp.task('styles', function() {
         .pipe(postcss([ autoprefixer() ]))
         .pipe(cleanCSS())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest( starterKit.getPathTheme() ));
+        .pipe(gulp.dest( './theme' ));
 
     return mergedStream;
 });
@@ -142,9 +153,9 @@ gulp.task('clone:database', function() {
 
 // Clone Folder theme in the directiry ./wordpress/wp-content/themes
 gulp.task('watch', function(){
-    gulp.watch('./theme/assets/scripts/**/*.*', ['scripts', 'browser:reload']);
-    gulp.watch('./theme/assets/styles/**/*.*', ['styles', 'browser:reload']);
-    gulp.watch('./theme/assets/images/**/*.*', ['theme:update']);
+    gulp.watch('./theme/Ressources/assets/scripts/**/*.*', ['scripts', 'browser:reload']);
+    gulp.watch('./theme/Ressources/assets/styles/**/*.*', ['styles', 'browser:reload']);
+    gulp.watch('./theme/Ressources/assets/images/**/*.*', ['theme:update']);
     gulp.watch('./theme/templates/**/*.*', ['theme:update']);
     gulp.watch('./theme/src/**/*.*', ['theme:update']);
     gulp.watch('./theme/app/**/*.*', ['theme:update']);

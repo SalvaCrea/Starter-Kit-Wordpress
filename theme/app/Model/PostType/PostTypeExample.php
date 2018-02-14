@@ -1,6 +1,6 @@
 <?php
 
-namespace StarterKitWp\Model\PostType;
+namespace AppWordpress\Model\PostType;
 
 use ChocolatineWp\Model\PostType;
 
