@@ -18,7 +18,8 @@ return [
      */
     "contact" => [
         "path"       => "/contact/{name}",
-        "controller" => "@AppWordpress:ContactController:viewAction",
+        "controller" => AppWordpress\Controller\contactController::class,
         "method"     => ["GET", "POST"],
+        "roles"      => ["admin"]
     ]
 ];
