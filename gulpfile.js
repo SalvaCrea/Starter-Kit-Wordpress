@@ -39,6 +39,7 @@ gulp.task('theme:install', function() {
  */
 gulp.task('create:virtual:folder', function() {
       if ( isWin ) {
+          console.log('mklink /D ' + currentPath + '\\wordpress\\wp-content\\themes\\' + configuration.themeName + " " + currentPath + '\\theme');
           exec('mklink /D ' + currentPath + '\\wordpress\\wp-content\\themes\\' + configuration.themeName + " " + currentPath + '\\theme',function (err, stdout, stderr) {
               console.log(stdout);
               console.log(stderr);
@@ -72,9 +73,9 @@ gulp.task('server:create', function(){
         base: './wordpress'
     },
     function(){
-      browserSync({
-          proxy: configuration.host + ':' + configuration.port
-      });
+        browserSync({
+            proxy: configuration.host + ':' + configuration.port
+        });
     });
 });
 

@@ -1,12 +1,12 @@
 <?php
-namespace AppWordpress\Model\Controller;
+namespace AppWordpress\Controller;
 
 use ChocolatineWp\Model\Controller;
 
-class PostController extends Controller
+class PageController extends Controller
 {
-    public function viewAction()
+    public function view()
     {
-
+        echo "test";
     }
 }

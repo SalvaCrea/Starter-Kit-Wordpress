@@ -1,3 +1,3 @@
 @echo off
 echo Go to run server.
-call gulp server
+call gulp server:start
