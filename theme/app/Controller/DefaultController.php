@@ -3,10 +3,10 @@ namespace AppWordpress\Controller;
 
 use ChocolatineWp\Component\Controller;
 
-class PageController extends Controller
+class DefaultController extends Controller
 {
     public function view()
     {
-        echo "PageController";
+        echo 'default';
     }
 }

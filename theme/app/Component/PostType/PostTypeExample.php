@@ -1,8 +1,8 @@
 <?php
 
-namespace AppWordpress\Model\PostType;
+namespace AppWordpress\Component\PostType;
 
-use ChocolatineWp\Model\PostType;
+use ChocolatineWp\Component\PostType;
 
 class PostTypeExample extends PostType
 {
@@ -11,7 +11,7 @@ class PostTypeExample extends PostType
     var $pluralName = 'Posts Types Examples';
     var $description = 'Post Type Description...';
 
-    public function model()
+    public function Model()
     {
         return [
             'title'  => 'Post Type Example Input',

@@ -1,7 +1,7 @@
 <?php
-namespace AppWordpress\Model\Sidebar;
+namespace AppWordpress\Component\Sidebar;
 
-use ChocolatineWp\Model\Sidebar;
+use ChocolatineWp\Component\Sidebar;
 
 class SidebarFooterLeft extends Sidebar
 {

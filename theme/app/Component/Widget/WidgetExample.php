@@ -1,7 +1,7 @@
 <?php
-namespace AppWordpress\Model\Widget;
+namespace AppWordpress\Component\Widget;
 
-use ChocolatineWp\Model\Widget;
+use ChocolatineWp\Component\Widget;
 
 class WidgetExample extends Widget
 {

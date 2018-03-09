@@ -5,12 +5,12 @@ class App
 {
     public function __construct()
     {
-        $postTypeExemple         = new Model\PostType\PostTypeExample();
-        $widgetFooterLeft        = new Model\Widget\WidgetExample();
-        $sidebarFooterLeft       = new Model\Sidebar\SidebarFooterLeft();
-        $sidebarFooterRight      = new Model\Sidebar\SidebarFooterRight();
-        $sidebarFooterMiddleLeft = new Model\Sidebar\SidebarFooterMiddleLeft();
-        $sidebarFooterMiddleLeft = new Model\Sidebar\SidebarFooterMiddleRight();
+        $postTypeExemple         = new Component\PostType\PostTypeExample();
+        $widgetFooterLeft        = new Component\Widget\WidgetExample();
+        $sidebarFooterLeft       = new Component\Sidebar\SidebarFooterLeft();
+        $sidebarFooterRight      = new Component\Sidebar\SidebarFooterRight();
+        $sidebarFooterMiddleLeft = new Component\Sidebar\SidebarFooterMiddleLeft();
+        $sidebarFooterMiddleLeft = new Component\Sidebar\SidebarFooterMiddleRight();
     }
     /**
      * Add Variable Globale in Twig
